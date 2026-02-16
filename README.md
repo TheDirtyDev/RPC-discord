@@ -17,7 +17,7 @@ A sleek Discord Rich Presence script for **FiveM** that displays your player’s
 - **Join Discord** button linking directly to your server invite  
 - **Connect** button to join your FiveM server instantly  
 - Easy to **configure for beginners**  
-
+![Preview](https://i.imgur.com/0TOg3e0.png)
 ---
 
 ##  Requirements
