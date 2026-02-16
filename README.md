@@ -1,4 +1,4 @@
-# 🌟 FiveM Discord Rich Presence v1.2.
+#  FiveM Discord Rich Presence v1.2.
 
 A sleek Discord Rich Presence script for **FiveM** that displays your player’s name, location, speed, and server player count in real-time. Includes clickable buttons for joining your Discord server or connecting directly to your FiveM server.
 
