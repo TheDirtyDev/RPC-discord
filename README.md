@@ -35,4 +35,4 @@ A sleek Discord Rich Presence script for **FiveM** that displays your player’s
 3. Add it to your `server.cfg`:
 
 ```cfg
-ensure RichPresence_v1.2
+ensure RPC-discord
