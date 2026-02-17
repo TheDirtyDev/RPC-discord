@@ -6,7 +6,7 @@ local config = {
     appid = "",
     largeImage = "",
     smallImage = "",
-    discordInvite = "",
+    discordInvite = "", 
     serverConnect = "",
     updateRate = 5000 -- 5 seconds (no need for a spam)
 }
@@ -42,13 +42,6 @@ local function GetPlayerCount()
     return 0
 end
 
--- Optional: Get Queue Count
-local function GetQueueCount()
-    if GlobalState.rpc and GlobalState.rpc[2] then
-        return GlobalState.rpc[2]
-    end
-    return 0
-end
 
 -- Discord Function
 local function SetupDiscord()
@@ -70,15 +63,13 @@ CreateThread(function()
         local street = GetStreetName()
         local status = GetPlayerStatus()
         local players = GetPlayerCount()
-        local queue = GetQueueCount()
 
         SetRichPresence(string.format(
-            "%s | %s | %s | %d Players (%d Queue)",
+            "%s | %s | %s | %d Players",
             name,
             street,
             status,
-            players,
-            queue
+            players
         ))
 
         SetDiscordRichPresenceAction(0, "Join Discord", config.discordInvite)
