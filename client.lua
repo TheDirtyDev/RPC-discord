@@ -28,7 +28,8 @@ local function GetPlayerStatus()
     if IsPedInAnyVehicle(ped, false) then
         local veh = GetVehiclePedIsIn(ped, false)
         local speed = GetEntitySpeed(veh) * 2.23694
-        return string.format("%d MPH", speed)
+        -- Round to nearest integer to avoid string.format error
+        return string.format("%d MPH", math.floor(speed + 0.5))
     else
         return "On Foot"
     end
