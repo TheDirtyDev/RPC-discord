@@ -1,13 +1,10 @@
-if Data.enabled then
-    GlobalState:set('rpc', {GetNumPlayerIndices(), 0}, true)
+CreateThread(function()
+    while true do
+        Wait(10000) -- update every 10 seconds
 
-    CreateThread(function()
-        while true do 
-            Wait(60000) -- 1 minute
-            GlobalState:set('rpc', {
-                GetNumPlayerIndices(),
-                Data.queueExport()
-            }, true)
-        end
-    end)
-end
+        GlobalState:set('rpc', {
+            GetNumPlayerIndices(),
+            0 -- Don't change this value
+        }, true)
+    end
+end)
