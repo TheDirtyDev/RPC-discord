@@ -1,11 +1,11 @@
-#  FiveM Discord Rich Presence v1.2.
+#  FiveM Discord Rich Presence v1.3
 
 A sleek Discord Rich Presence script for **FiveM** that displays your player’s name, location, speed, and server player count in real-time. Includes clickable buttons for joining your Discord server or connecting directly to your FiveM server.
 
 ---
 
 ![Discord](https://img.shields.io/badge/Discord-Join%20Now-7289DA?logo=discord&logoColor=white)
-![Version](https://img.shields.io/badge/Version-1.2-green)
+![Version](https://img.shields.io/badge/Version-1.3-green)
 
 ---
 
