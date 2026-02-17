@@ -1,21 +1,19 @@
--- ===============================
---          DISCORD RPC CONFIG
--- ===============================
+-- ===================================================
+--          DISCORD RPC CONFIG / Credits: the.dirtydev
+-- ====================================================
 
 local config = {
-    appid = "", -- Get this from https://discord.com/developers/applications
-    largeImage = "", -- Name of the large image you uploaded in Discord Rich Presence
-    smallImage = "", -- Name of the small image you uploaded in Discord Rich Presence
-    discordInvite = "", -- Discord invite link
-    serverConnect = "", -- Connect link for your server
-    updateRate = 2000 -- Update rate in milliseconds (2000ms = 2 seconds)
+    appid = "",
+    largeImage = "",
+    smallImage = "",
+    discordInvite = "",
+    serverConnect = "",
+    updateRate = 5000 -- 5 seconds (no need for a spam)
 }
 
--- ===============================
---     DO NOT TOUCH BELOW THIS LINE UNLESS YOU KNOW WHAT YOU'RE DOING
--- ===============================
+-- =================== DO NOT TOUCH BELOW THIS LINE UNLESS YOU KNOW WHAT YOU'RE DOING  =======================
 
--- Street Name Function
+-- Street Name
 local function GetStreetName()
     local ped = PlayerPedId()
     local coords = GetEntityCoords(ped)
@@ -23,28 +21,33 @@ local function GetStreetName()
     return GetStreetNameFromHashKey(streetHash)
 end
 
--- Status Function 
+-- Player Status
 local function GetPlayerStatus()
     local ped = PlayerPedId()
 
     if IsPedInAnyVehicle(ped, false) then
         local veh = GetVehiclePedIsIn(ped, false)
-        local speed = GetEntitySpeed(veh) * 2.23694 -- Convert m/s to MPH
+        local speed = GetEntitySpeed(veh) * 2.23694
         return string.format("%d MPH", speed)
     else
         return "On Foot"
     end
 end
 
--- Get player count Function
+-- Get Synced Player Count From Server (UPDATED SECTION 1.3)
 local function GetPlayerCount()
-    local count = 0
-    for i = 0, 128 do
-        if NetworkIsPlayerActive(i) then
-            count = count + 1
-        end
+    if GlobalState.rpc and GlobalState.rpc[1] then
+        return GlobalState.rpc[1]
     end
-    return count
+    return 0
+end
+
+-- Optional: Get Queue Count
+local function GetQueueCount()
+    if GlobalState.rpc and GlobalState.rpc[2] then
+        return GlobalState.rpc[2]
+    end
+    return 0
 end
 
 -- Discord Function
@@ -54,24 +57,28 @@ local function SetupDiscord()
     SetDiscordRichPresenceAssetSmall(config.smallImage)
 end
 
+
 -- Main Thread
 CreateThread(function()
+
+    SetupDiscord() 
+
     while true do
         Wait(config.updateRate)
-
-        SetupDiscord()
 
         local name = GetPlayerName(PlayerId())
         local street = GetStreetName()
         local status = GetPlayerStatus()
         local players = GetPlayerCount()
+        local queue = GetQueueCount()
 
         SetRichPresence(string.format(
-            "%s | %s | %s | %d Players",
+            "%s | %s | %s | %d Players (%d Queue)",
             name,
             street,
             status,
-            players
+            players,
+            queue
         ))
 
         SetDiscordRichPresenceAction(0, "Join Discord", config.discordInvite)
